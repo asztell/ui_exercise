@@ -1,12 +1,12 @@
 # UI_Exercise for one main
 
-## Copied from [https://github.com/stevematyas/ui_exercise](https://github.com/stevematyas/ui_exercise)
+### Copied from [https://github.com/stevematyas/ui_exercise](https://github.com/stevematyas/ui_exercise)
 
-## To see the react source code open source-files folder
+### To see the react source code open source-files folder
 
-## To run the source code follow the instruction from the "Getting started with Create React App" section
+### To run the source code follow the instruction from the "Getting started with Create React App" section
 
-## To run the build run the solution folder in a web server
+### To run the build run the solution folder in a web server
 
 # Getting Started with Create React App
 
