@@ -1,0 +1,195 @@
+<div class="Form">
+  <h2>One-time Loan Payment</h2>
+  <p>Fill out the form below to complete your payment.</p>
+  <!-- formValues: {{ formValues | json }} -->
+  <!-- <br />
+  isChecking: {{ isChecking }}
+  <br />
+  isDebitCard: {{ isDebitCard }} -->
+  <form>
+    <div class="field">
+      <label for="loanAccount"> Loan Account Number </label>
+      <input
+        type="number"
+        name="loanAccount"
+        #loanAccount="ngModel"
+        [(ngModel)]="formValues.loanAccount"
+        min="1000000000"
+        max="9999999999"
+        required
+      />
+      <!-- <br />touched: {{ loanAccount.touched }} <br />dirty: {{ loanAccount.dirty }} <br />errors:
+      {{ loanAccount.errors | json }}<br /> -->
+      <div *ngIf="loanAccount.touched || loanAccount.dirty">
+        <span *ngIf="loanAccount.touched && loanAccount.errors?.['required']">
+          Loan Account Number is required
+        </span>
+        <span *ngIf="loanAccount.touched && loanAccount.errors?.['min']">
+          Valid Loan Account Number is 10 digits
+        </span>
+      </div>
+    </div>
+    <div class="split-container">
+      <div class="split-left">
+        <div class="field">
+          <label for="accountType">Type of Account</label>
+          <div class="radio-group">
+            <div (click)="setAccountType('checking')">
+              <input
+                type="radio"
+                name="checking"
+                #checking="ngModel"
+                [(ngModel)]="formValues.checking"
+                [value]="formValues.checking === 'true' ? 'true' : 'false'"
+              />
+              <label for="checking">Checking</label>
+            </div>
+            <div (click)="setAccountType('debitCard')">
+              <input
+                type="radio"
+                name="debitCard"
+                #debitCard="ngModel"
+                [(ngModel)]="formValues.debitCard"
+                [value]="formValues.debitCard === 'true' ? 'true' : 'false'"
+              />
+              <label for="debitCard">Debit Card</label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formValues.checking">
+          <div class="field">
+            <label for="routing" class="{setLabelClassName(routingError)}"> Routing Number </label>
+            <input
+              type="number"
+              name="routing"
+              #routing="ngModel"
+              [(ngModel)]="formValues.routing"
+              minlength="9"
+              maxlength="9"
+            />
+            <div *ngIf="routing.touched || routing.dirty">
+              <span *ngIf="routing.touched && routing.errors?.['minlength']">
+                Valid Routing Number is required
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="bankAccount" class="{setLabelClassName(bankAccountError)}">
+              Bank Account Number
+            </label>
+            <input
+              type="number"
+              name="bankAccount"
+              #bankAccount="ngModel"
+              [(ngModel)]="formValues.bankAccount"
+              minlength="10"
+              maxlength="10"
+            />
+            <div *ngIf="bankAccount.touched || bankAccount.dirty">
+              <span *ngIf="bankAccount.touched && bankAccount.errors?.['minlength']">
+                Valid Bank Account Number is required
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="confirmBankAccount" class="{setLabelClassName(confirmBankAccountError)}">
+              Confirm Bank Account Number
+            </label>
+            <input
+              type="number"
+              name="confirmBankAccount"
+              #confirmBankAccount="ngModel"
+              [(ngModel)]="formValues.confirmBankAccount"
+              minlength="10"
+              maxlength="10"
+            />
+            <div *ngIf="confirmBankAccount.touched || confirmBankAccount.dirty">
+              <span *ngIf="confirmBankAccount.touched && confirmBankAccount.errors?.['minlength']">
+                Valid Confirm Bank Account Number is required
+              </span>
+              <span class="{setSpanClassName(confirmBankAccountMismatch)}">
+                Confirm Bank Account Number must match Bank Account Number
+              </span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formValues.debitCard">
+          <div class="field">
+            <label for="card" class="{setLabelClassName(cardError)}"> Card Number </label>
+            <input
+              type="number"
+              name="card"
+              #card="ngModel"
+              [(ngModel)]="formValues.card"
+              minlength="16"
+              maxlength="16"
+            />
+            <div *ngIf="card.touched || card.dirty">
+              <span *ngIf="card.touched && card.errors?.['minlength']">
+                Valid Card Number is required
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="nameOnCard" class="{setLabelClassName(nameOnCardError)}">
+              Name on Card
+            </label>
+            <input
+              type="text"
+              name="nameOnCard"
+              #nameOnCard="ngModel"
+              [(ngModel)]="formValues.nameOnCard"
+              minlength="1"
+            />
+            <div *ngIf="nameOnCard.touched || nameOnCard.dirty">
+              <span *ngIf="nameOnCard.touched && nameOnCard.errors?.['minlength']">
+                Valid Name is required
+              </span>
+            </div>
+          </div>
+          <div class="half-field">
+            <div class="field">
+              <label for="expirationDate" class="{setLabelClassName(expirationDateError)}">
+                Expiration Date
+              </label>
+              <input
+                type="date"
+                name="expirationDate"
+                #expirationDate="ngModel"
+                [(ngModel)]="formValues.expirationDate"
+              />
+              <div *ngIf="expirationDate.touched || expirationDate.dirty">
+                <span *ngIf="expirationDate.touched && expirationDate.errors?.['required']">
+                  Valid Expiration Date is required
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="{setLabelClassName(cvvError)}" for="cvv"> CVV </label>
+              <input type="number" name="cvv" #cvv="ngModel" [(ngModel)]="formValues.cvv" />
+              <div *ngIf="cvv.touched || cvv.dirty">
+                <span class="{setSpanClassName(cvvError)}"> Valid CVV is required </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="split-right">
+        <div>
+          <p>Where can I find the routing and account number?</p>
+          <img
+            class=""
+            className_="{checking === 'on' ? 'check' : 'cvv'}"
+            src=""
+            src_="{checking === 'on' ? check : cvv}"
+            alt=""
+            alt_="routing and account number"
+          />
+        </div>
+      </div>
+    </div>
+    <div className="submit">
+      <input type="button" value="MAKE PAYMENT" (click)="onSubmit()" />
+    </div>
+  </form>
+</div>
