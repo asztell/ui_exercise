@@ -58,7 +58,9 @@
         </div>
         <div *ngIf="formValues.checking">
           <div class="field">
-            <label for="routing" class="{setLabelClassName(routingError)}"> Routing Number </label>
+            <label for="routing" class="{setLabelClassName(routingError)}">
+              Routing Number
+            </label>
             <input
               type="number"
               name="routing"
@@ -74,7 +76,10 @@
             </div>
           </div>
           <div class="field">
-            <label for="bankAccount" class="{setLabelClassName(bankAccountError)}">
+            <label
+              for="bankAccount"
+              class="{setLabelClassName(bankAccountError)}"
+            >
               Bank Account Number
             </label>
             <input
@@ -86,13 +91,18 @@
               maxlength="10"
             />
             <div *ngIf="bankAccount.touched || bankAccount.dirty">
-              <span *ngIf="bankAccount.touched && bankAccount.errors?.['minlength']">
+              <span
+                *ngIf="bankAccount.touched && bankAccount.errors?.['minlength']"
+              >
                 Valid Bank Account Number is required
               </span>
             </div>
           </div>
           <div class="field">
-            <label for="confirmBankAccount" class="{setLabelClassName(confirmBankAccountError)}">
+            <label
+              for="confirmBankAccount"
+              class="{setLabelClassName(confirmBankAccountError)}"
+            >
               Confirm Bank Account Number
             </label>
             <input
@@ -104,7 +114,9 @@
               maxlength="10"
             />
             <div *ngIf="confirmBankAccount.touched || confirmBankAccount.dirty">
-              <span *ngIf="confirmBankAccount.touched && confirmBankAccount.errors?.['minlength']">
+              <span
+                *ngIf="confirmBankAccount.touched && confirmBankAccount.errors?.['minlength']"
+              >
                 Valid Confirm Bank Account Number is required
               </span>
               <span class="{setSpanClassName(confirmBankAccountMismatch)}">
@@ -115,7 +127,9 @@
         </div>
         <div *ngIf="formValues.debitCard">
           <div class="field">
-            <label for="card" class="{setLabelClassName(cardError)}"> Card Number </label>
+            <label for="card" class="{setLabelClassName(cardError)}">
+              Card Number
+            </label>
             <input
               type="number"
               name="card"
@@ -131,7 +145,10 @@
             </div>
           </div>
           <div class="field">
-            <label for="nameOnCard" class="{setLabelClassName(nameOnCardError)}">
+            <label
+              for="nameOnCard"
+              class="{setLabelClassName(nameOnCardError)}"
+            >
               Name on Card
             </label>
             <input
@@ -142,14 +159,19 @@
               minlength="1"
             />
             <div *ngIf="nameOnCard.touched || nameOnCard.dirty">
-              <span *ngIf="nameOnCard.touched && nameOnCard.errors?.['minlength']">
+              <span
+                *ngIf="nameOnCard.touched && nameOnCard.errors?.['minlength']"
+              >
                 Valid Name is required
               </span>
             </div>
           </div>
           <div class="half-field">
             <div class="field">
-              <label for="expirationDate" class="{setLabelClassName(expirationDateError)}">
+              <label
+                for="expirationDate"
+                class="{setLabelClassName(expirationDateError)}"
+              >
                 Expiration Date
               </label>
               <input
@@ -159,16 +181,27 @@
                 [(ngModel)]="formValues.expirationDate"
               />
               <div *ngIf="expirationDate.touched || expirationDate.dirty">
-                <span *ngIf="expirationDate.touched && expirationDate.errors?.['required']">
+                <span
+                  *ngIf="expirationDate.touched && expirationDate.errors?.['required']"
+                >
                   Valid Expiration Date is required
                 </span>
               </div>
             </div>
             <div class="field">
-              <label class="{setLabelClassName(cvvError)}" for="cvv"> CVV </label>
-              <input type="number" name="cvv" #cvv="ngModel" [(ngModel)]="formValues.cvv" />
+              <label class="{setLabelClassName(cvvError)}" for="cvv">
+                CVV
+              </label>
+              <input
+                type="number"
+                name="cvv"
+                #cvv="ngModel"
+                [(ngModel)]="formValues.cvv"
+              />
               <div *ngIf="cvv.touched || cvv.dirty">
-                <span class="{setSpanClassName(cvvError)}"> Valid CVV is required </span>
+                <span class="{setSpanClassName(cvvError)}">
+                  Valid CVV is required
+                </span>
               </div>
             </div>
           </div>
@@ -176,15 +209,13 @@
       </div>
       <div class="split-right">
         <div>
+          @if (formValues.checking === 'true') {
           <p>Where can I find the routing and account number?</p>
-          <img
-            class=""
-            className_="{checking === 'on' ? 'check' : 'cvv'}"
-            src=""
-            src_="{checking === 'on' ? check : cvv}"
-            alt=""
-            alt_="routing and account number"
-          />
+          <img src="../../../../assets/check.png" alt="Check" class="check" />
+          } @else {
+          <p>Where can I find the debit card information?</p>
+          <img src="../../../../assets/cvv.png" alt="Debit Card" class="cvv" />
+          }
         </div>
       </div>
     </div>
